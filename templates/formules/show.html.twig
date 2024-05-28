@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formules{% endblock %}
+
+{% block body %}
+<div class="page">
+    <h1>Formules</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ formules.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ formules.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ formules.description }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ formules.prix }}</td>
+            </tr>
+            <tr>
+                <th>IsActive</th>
+                <td>{{ produit.isActive ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_formules_index') }}">back to list</a>
+
+    <a href="{{ path('app_formules_edit', {'id': formules.id}) }}">edit</a>
+
+    {{ include('formules/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

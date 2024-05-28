@@ -1,0 +1,85 @@
+<header>
+
+    {# nav-main #}
+
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark" id="nav-main">
+      <div class="container-fluid">
+{#         <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> #}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  {% if app.user %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i>mon compte
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            {% if is_granted("ROLE_ADMIN") %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-clipboard-data"></i>administration
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="{{ path ('app_user_index') }}">gestion des utilisateurs</a></li>
+                <li><a class="dropdown-item" href="{{ path ('app_formules_index') }}">gestion des formules</a></li>
+                <li><a class="dropdown-item" href="{{ path ('app_entrees_index') }}">gestion des entrées</a></li>
+                <li><a class="dropdown-item" href="{{ path ('app_plats_index') }}">gestion des plats</a></li>
+                <li><a class="dropdown-item" href="{{ path ('app_desserts_index') }}">gestion des désserts</a></li>
+                <li><hr class="dropdown-divider"></li>
+              </ul>
+            </li>
+            {% endif %}
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path ('app_login') }}"><i class="bi bi-box-arrow-in-right"></i>connexion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path ('app_register') }}"><i class="bi bi-record-circle"></i>s'enregistrer</a>
+            {% endif %}
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Search">
+            <button class="btn btn-outline-warning" type="submit"><i class="bi bi-search"></i></button>
+          </form>
+          {% if app.user %}
+           {% if panier is defined %}
+            <li class="nav-item">
+                <a class="btn btn-light btn-co" href="{{ path('app_panier') }}"><i class="bi bi-cart"></i><span class="badge text-bg-danger ms-1">{{ panier.lineCommandes|length }}</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_commande_index') }}">Mes commandes</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="btn btn-light btn-co" href="{{ path ('app_logout') }}"><i class="bi bi-box-arrow-right"></i>déconnexion</a>
+            </li>
+        {% endif %}
+        </div>
+      </div>
+    </nav>
+
+
+    {# nan-second #}
+
+    <nav class="nav nav-justified align-items-center" id="nav-second">
+        <a class="nav-link btn btn-nav2" href="#">la carte</a>
+        <a class="nav-link btn btn-nav2" href="{{ path ('app_formules_index') }}">les formules</a>
+        <a class="nav-link btn btn-nav2" href="#">réserver une table</a>
+        <a class="nav-link btn btn-nav2" href="#">commander</a>
+    </nav>
+
+
+    {# logo-babulon #}
+
+    <a href="{{ path ('app_home') }}"><img src="{{ asset ('img/logo/logo.png') }}" class="fixed-top" id="logo-babylon"></a>
+
+</header>
+<main>

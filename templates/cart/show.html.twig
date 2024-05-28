@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+<div class="page">
+    <h1>Produit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ formule.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ formule.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ formule.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if app.user %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn">Ajouter au panier</button>
+    {{ form_end(form) }}
+    {% endif %}
+
+    <a href="{{ path('app_home') }}">Retour à l'accueil</a>
+    </div>
+{% endblock %}

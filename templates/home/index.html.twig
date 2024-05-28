@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue au bistrot Babylon !{% endblock %}
+
+{% block body %}
+<div class="carousel-accueil">
+		
+		{# Insertion du carousel #}
+		<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+
+			<div class="carousel-inner">
+
+				{% for formule in formules %}
+				{% if loop.first %}
+
+				<div class="carousel-item active" data-bs-interval="10000">
+				{% else %}
+{# 					<a href="{{ path('app_formule', {'id': formule.id}) }}">
+					<img src="{{ asset ('uploads/images/') }}{{ formule.photo }}" class="d-block w-100 mt-5" alt="photo de caroussel">
+					</a>
+					<div class="carousel-caption d-none d-md-block">
+						<h5>{{ formule.nom }}</h5>
+						<p>{{ formule.description }}</p>
+					</div>
+				</div>
+				
+ 				<div class="carousel-item" data-bs-interval="2000">
+					<a href="{{ path('app_formule', {'id': formule.id}) }}">
+					<img src="{{ asset ('uploads/images/') }}{{ formule.photo }}" class="d-block w-100 mt-5" alt="photo de caroussel">
+					</a>
+					<div class="carousel-caption d-none d-md-block">
+						<h5>{{ formule.nom }}</h5>
+						<p>{{ formule.description }}</p>
+					</div>
+				</div> #}
+				
+				<div class="carousel-item">
+					{% endif %}
+					<a href="{{ path('app_formules', {'id': formules.id}) }}">
+					<img src="{{ asset ('uploads/images/' ~ formules.photo) }}" class="d-block w-100 mt-5" alt="photo de caroussel">
+					</a>
+					<div class="carousel-caption d-none d-md-block">
+						<h5>{{ formules.nom }}</h5>
+						<p>{{ formules.description }}</p>
+					</div>
+				</div>
+			{% endfor %}
+			</div>
+
+			<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+
+	</div>
+{% endblock %}

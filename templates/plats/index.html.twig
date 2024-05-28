@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index des plats{% endblock %}
+
+{% block body %}
+<div class="page plats">
+    <h1>Index des plats</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for plat in plats %}
+            <tr>
+                <td>{{ plat.id }}</td>
+                <td>{{ plat.nom }}</td>
+                <td>{{ plat.description }}</td>
+                <td>{{ plat.prix }}</td>
+                <td>
+                    <a href="{{ path('app_plats_show', {'id': plat.id}) }}" class="btn btn-light">Afficher</a>
+                    <a href="{{ path('app_plats_edit', {'id': plat.id}) }}" class="btn btn-warning">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_plats_new') }}" class="btn btn-secondary">Nouveau plat</a>
+</div>
+{% endblock %}

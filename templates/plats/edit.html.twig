@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier les plats{% endblock %}
+
+{% block body %}
+<div class="page plats">
+    <h1>Modifier les plats</h1>
+
+    {{ include('plats/_form.html.twig', {'button_label': 'Mise à jour'}) }}
+
+    <a href="{{ path('app_plats_index') }}" class="btn btn-primary">retour à la liste</a>
+
+    {{ include('plats/_delete_form.html.twig') }}
+</div>
+{% endblock %}

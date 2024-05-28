@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formules index{% endblock %}
+
+{% block body %}
+<div class="page formules">
+    <h1>Formules index</h1>
+
+    {# <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>entrees</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formule in formules %}
+            <tr>
+                <td>{{ formule.id }}</td>
+                <td>{{ formule.nom }}</td>
+                {% if formule.description %}
+                <td>{{ formule.description }}</td>
+                {% else %}
+                {% endif %}
+                <td>{% for item in formule.entrees %}
+                    {{ item.nom }}
+                    {% endfor %}
+                </td>
+                <td>{{ formule.prix }}</td>
+                <td>
+                    <a href="{{ path('app_formules_show', {'id': formule.id}) }}">show</a>
+                    <a href="{{ path('app_formules_edit', {'id': formule.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table> #}
+
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+{% for formule in formules %}
+  <div class="col">
+<div class="card" style="width: 18rem;">
+  <img src="{{ asset ('uploads/images/') }}{{ formule.photo }}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ formule.nom }}</h5>
+    <p class="card-text">{{ formule.description }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Entrée :<ul>{% for item in formule.entrees %}
+        <li>{{ item.nom }}</li>
+        {% endfor %}</ul></li>
+    <li class="list-group-item">Plat :<ul>{% for item in formule.plats %}
+        <li>{{ item.nom }}</li>
+        {% endfor %}</ul></li>
+    <li class="list-group-item">Déssert :<ul>{% for item in formule.desserts %}
+        <li>{{ item.nom }}</li>
+        {% endfor %}</ul></li>
+  </ul>
+  <div class="card-body">
+    <a href="{{ path('app_formules_show', {'id': formule.id}) }}" class="btn btn-light">Afficher</a>
+    <a href="{{ path ('app_panier', {'id': formule.id}) }}" class="btn btn-primary btn-sm text-light bg-dark">
+	<i class="fas fa-shopping-cart"></i> Ajouter
+	</a>
+  </div>
+</div>
+  </div>
+{% else %}
+</div>
+{% endfor %}
+
+</div>
+
+    <a href="{{ path('app_formules_new') }}">Create new</a>
+
+{% endblock %}

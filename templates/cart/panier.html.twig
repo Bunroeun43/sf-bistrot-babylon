@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formules index{% endblock %}
+
+{% block body %}
+<div class="page">
+<h1>Panier</h1>
+{% if panier != null %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>quantité</th>
+                <th>Montant</th>
+            </tr>
+        </thead>
+        <tbody>
+{# On créé un compteur 'total' qui augmentera à chaque tour de boucle en ajoutant le montant de chaque ligne de commande #}
+{% set total = 0 %}
+{% for lineCommande in panier.lineCommandes %}
+{# 'totalLigne' représente le montant d'une ligne de commande, càd le prix du produit par la quantité correspondante #}
+{% set totalLine = lineCommande.quantite * lineCommande.produit.prix %}
+            <tr>
+                <th>{{ lineCommande.produit.id }}</th>
+                <th>{{ lineCommande.produit.nom }}</th>
+                <th>{{ lineCommande.quantite }}</th>
+                <th>{{ totalLine }} €</th>
+            </tr>
+{% set total = total + totalLine %}
+{% endfor %}
+            <tr>
+                <th></th>
+                <th>TVA</th>
+                <th></th>
+                <th>{{ (total * 0.055)|round(2) }} €</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>Total commande</th>
+                <th></th>
+                {# on affiche le compteur 'total' #}
+                <th>{{ total }} €</th>
+            </tr>
+        </tbody>
+    </table>
+{% else %}
+<p>Vous devez être connecté pour accéder à votre panier</p>
+<a href="{{ path('app_login') }}">Se connecter</a>
+{% endif %}
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+{{ form_end(form) }}
+<a href="{{ path('app_home') }}">Retour à l'accueil</a>
+</div>
+{% endblock %}

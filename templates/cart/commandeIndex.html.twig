@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes{% endblock %}
+
+{% block body %}
+
+<h1>Mes commandes</h1>
+{# {% if panier != null %} #}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>statut</th>
+                <th>montant</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+        {% set total = 0 %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.statut }}</td>
+                {# on va effectuer un traitement comparable à celui du panier pour afficher le montant de la commande #}
+                {% for lineCommande in commande.lineCommandes %}
+                {% set totalLine = lineCommande.quantite * lineCommande.produit.prix %}
+                {% set total = total + totalLine %}
+                {% endfor %}
+                <td>{{ total }}</td>
+
+                <td>
+                    <a href="">voir</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<a href="{{ path('app_home') }}">Retour vers l'accueil</a>
+{% endblock %}

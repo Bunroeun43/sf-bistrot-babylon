@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Formules{% endblock %}
+
+{% block body %}
+<div class="page formules">
+    <h1>Create new Formules</h1>
+
+    {{ include('formules/_form.html.twig') }}
+
+    <a href="{{ path('app_formules_index') }}">back to list</a>
+</div>
+{% endblock %}

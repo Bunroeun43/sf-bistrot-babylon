@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index des utilisateurs{% endblock %}
+
+{% block body %}
+<div class="page user">
+    <h1>Index des utilisateurs</h1>
+
+    {# <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Naissance</th>
+                <th>Adresse</th>
+                <th>Complementadresse</th>
+                <th>Codepostal</th>
+                <th>Ville</th>
+                <th>Telephone</th>
+                <th>Photo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}
+                <ul>
+                    {% for role in user.roles %}
+                    <li>{{ role }}</li>
+                    {% endfor %}
+                </ul>
+                </td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.naissance ? user.naissance|date('d/m/Y') : '' }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>{{ user.complementadresse }}</td>
+                <td>{{ user.codepostal }}</td>
+                <td>{{ user.ville }}</td>
+                <td>{{ user.telephone }}</td>
+                <td>{{ user.photo }}</td>
+                <td>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-light">Afficher</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table> #}
+
+
+<div class="card-group card-user">
+{% for user in users %}
+    <div class="card mb-3" style="min-width: 518px;" style="max-width: 600px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{% if user.photo %} {{ asset ('uploads/images/') }}{{ user.photo }} {% else %} {{ asset ('img/avatar-default.png') }} {% endif %}" class="img-fluid rounded-start" alt="photo">
+            </div>
+            <div class="col-md-8">
+                <div div class="card-body">
+                    <h5 class="card-title">{{ user.prenom|capitalize }} {{ user.nom|upper }}</h5>
+                        <p class="card-text">
+                            <table class="tg">
+                                <thead>
+                                    <tr>
+                                      <th class="tg-0pky">date de naissance :</th>
+                                    <td>{{ user.naissance|date('d / m / Y') }}</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="tg-0pky align-top">adresse :</th>
+                                        <td>{{ user.adresse }}</td>
+                                    </tr>
+                                    {% if user.complementadresse %}
+                                    <tr>
+                                        <th class="tg-0pky">complément d'adresse :</th>
+                                        <td>{{ user.complementadresse }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                      <th class="tg-0pky">code postal :</th>
+                                      <td>{{ user.codepostal }}</td>
+                                    </tr>
+                                      <th class="tg-0pky">ville :</th>
+                                      <td>{{ user.ville }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th class="tg-0pky">numéro de téléphone :</th>
+                                      {% set nums = user.telephone %}
+                                      {% set nums = nums|split('', 2) %}
+                                      <td>{% for num in nums %} {{ num }} {% endfor %}</td>
+                                    </tr>
+                                    {# <tr>
+                                      <th class="tg-0pky">roles :</th>
+                                      <td>
+                                            <ul>
+                                                {% for role in user.roles %}
+                                                <li>{{ role }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </td>
+                                    </tr> #}
+                                    <tr>
+                                      <th class="tg-0pky">genre :</th>
+                                      <td>{{ user.genre }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-light">Afficher</a>
+                                <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning">Modifier</a>
+                            </small>
+                        </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+    <a href="{{ path('app_user_new') }}" class="btn btn-secondary">Nouveau utilisateur</a>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Entrees{% endblock %}
+
+{% block body %}
+<div class="page entrees">
+    <h1>Create new Entrees</h1>
+
+    {{ include('entrees/_form.html.twig') }}
+
+    <a href="{{ path('app_entrees_index') }}" class="btn btn-primary">retour à la liste</a>
+</div>
+{% endblock %}

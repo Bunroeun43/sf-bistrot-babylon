@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Entrees{% endblock %}
+
+{% block body %}
+<div class="page entrees">
+    <h1>Edit Entrees</h1>
+
+    {{ include('entrees/_form.html.twig', {'button_label': 'Mise à jour'}) }}
+
+    <a href="{{ path('app_entrees_index') }}" class="btn btn-primary">retour à la liste</a>
+
+    {{ include('entrees/_delete_form.html.twig') }}
+</div>
+{% endblock %}

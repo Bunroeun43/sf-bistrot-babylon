@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plats{% endblock %}
+
+{% block body %}
+<div class="page plats">
+    <h1>Plats</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ plat.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ plat.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ plat.description }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ plat.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_plats_index') }}" class="btn btn-primary">retour à la liste</a>
+
+    <a href="{{ path('app_plats_edit', {'id': plat.id}) }}" class="btn btn-warning">Modifier</a>
+
+    {{ include('plats/_delete_form.html.twig') }}
+</div>
+{% endblock %}
